@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_15_003342) do
+ActiveRecord::Schema.define(version: 2019_03_15_010242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "facilities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "location_id"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_facilities_on_location_id"
+    t.index ["name"], name: "index_facilities_on_name"
+    t.index ["organization_id"], name: "index_facilities_on_organization_id"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "address1"
@@ -35,4 +46,6 @@ ActiveRecord::Schema.define(version: 2019_03_15_003342) do
     t.index ["name"], name: "index_organizations_on_name"
   end
 
+  add_foreign_key "facilities", "locations"
+  add_foreign_key "facilities", "organizations"
 end
