@@ -29,7 +29,7 @@ gem 'activerecord-postgis-adapter'
 # gem 'rack-cors'
 
 group :development, :test do
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
   gem 'pry'
 end
 
